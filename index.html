@@ -15,8 +15,10 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="styles.css">
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <script src="moment.js"></script>
   </head>
 
   <body>
@@ -35,16 +37,42 @@
         var oldIndex = 0;
         // $body.html('');
 
-        var displayTweets = function(index) {
+        var reformatTime = function() {
+          return moment().format('lll');
+        }
+
+        var showProfilePics = function($tweet, tweet) {
+          var $profilePic = $('<img id="picture">');
+          var path;
+          $profilePic.prependTo($tweet);
+           if (tweet.user === 'shawndrost') {
+              path = 'images/HR-Shawn.jpg';
+            } else if (tweet.user === 'sharksforcheap') {
+              path = 'images/HR-Sharks.jpeg';
+            } else if (tweet.user === 'mracus') {
+              path = 'images/HR-Marcus.jpeg';
+            } else {
+              path = 'images/HR-Doug.JPG';
+            }
+            $tweet.find('#picture').attr('src', path);
+        }
+
+        var constructTweetText = function($tweet, tweet) {
+          return $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + reformatTime());
+        }
+         
+        var showTweets = function(index, tweet) {
           var tweet = streams.home[index];
           var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
+
+          constructTweetText($tweet, tweet);
+          showProfilePics($tweet, tweet);
           $tweet.prependTo($('.tweet-section'));
         }
 
         var generateTweets = function() {
           while(index >= oldIndex){
-            displayTweets(index);
+            showTweets(index);
             index -= 1;
           }
         }
@@ -62,7 +90,6 @@
         }
 
         $('.new-tweets').on('click', showNewTweets)
-
       });
 
     </script>
