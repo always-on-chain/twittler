@@ -4,3 +4,12 @@
 	margin-right: 10px;
 	border-radius: 50%;
 }
+
+#username, #picuture, #time{
+	/*float: right;*/
+	display: inline;
+}
+
+#username {
+	margin-right: 20px;
+}
