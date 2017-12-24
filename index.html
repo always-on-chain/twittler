@@ -25,73 +25,8 @@
     <div>
       <button class='new-tweets'>See New Tweets</button>
     </div>
-
     <!--Get tweets to show below button--> 
     <div class='tweet-section'></div>
-
-    <script>
-
-      $(document).ready(function(){
-        var $body = $('body');
-        var index = streams.home.length - 1;
-        var oldIndex = 0;
-        // $body.html('');
-
-        var reformatTime = function() {
-          return moment().format('lll');
-        }
-
-        var showProfilePics = function($tweet, tweet) {
-          var $profilePic = $('<img id="picture">');
-          var path;
-          $profilePic.prependTo($tweet);
-           if (tweet.user === 'shawndrost') {
-              path = 'images/HR-Shawn.jpg';
-            } else if (tweet.user === 'sharksforcheap') {
-              path = 'images/HR-Sharks.jpeg';
-            } else if (tweet.user === 'mracus') {
-              path = 'images/HR-Marcus.jpeg';
-            } else {
-              path = 'images/HR-Doug.JPG';
-            }
-            $tweet.find('#picture').attr('src', path);
-        }
-
-        var constructTweetText = function($tweet, tweet) {
-          return $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + reformatTime());
-        }
-         
-        var showTweets = function(index, tweet) {
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-
-          constructTweetText($tweet, tweet);
-          showProfilePics($tweet, tweet);
-          $tweet.prependTo($('.tweet-section'));
-        }
-
-        var generateTweets = function() {
-          while(index >= oldIndex){
-            showTweets(index);
-            index -= 1;
-          }
-        }
-
-        var initializeTweets = function() {
-          generateTweets();
-          oldIndex = streams.home.length - 1;
-        }
-        initializeTweets();
-
-        var showNewTweets = function() {
-          index = streams.home.length - 1;
-          generateTweets(index, oldIndex);
-          oldIndex = streams.home.length - 1;
-        }
-
-        $('.new-tweets').on('click', showNewTweets)
-      });
-
-    </script>
+    <script src='scripts.js'></script>
   </body>
 </html>
