@@ -20,11 +20,7 @@
   var $body = $('body');
   var array = streams.home
   var index = streams.home.length;
-  var oldIndex = 0
-
-  var reformatTime = function() {
-    return moment().format('lll');
-  }
+  var oldIndex = 0;
 
   var createProfilePicTags = function($tweet, tweet) {
     var $profilePic = $('<img id="picture">');
@@ -68,7 +64,7 @@
   }
 
   var createTimeTags = function($tweet, tweet) {
-    var $time = $('<p id="time">' + tweet.created_at + '</p>');
+    var $time = $('<p id="time">' + dateFormat(tweet.created_at, "dddd, mmmm dS, yyyy, h:MM:ss TT") + '</p>');
     $time.prependTo($tweet);
   }
 
