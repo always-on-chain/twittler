@@ -28,6 +28,25 @@
 	text-decoration: underline;
 }
 
+#form, #user {
+	display: inline;
+}
+
+.status {
+	margin-bottom: 30px;
+}
+
+#tweet {
+	/*float: right;*/
+}
+
+#user {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	display: inline;
+}
+
 #username {
 	margin-right: 20px;
 	color: grey;
