@@ -17,8 +17,9 @@
  */
 
  $(document).ready(function(){
+  var $body = $('body');
   var array = streams.home
-  var index = streams.home.length - 1;
+  var index = streams.home.length;
   var oldIndex = 0
 
   var reformatTime = function() {
@@ -35,8 +36,10 @@
       path = 'images/HR-Sharks.jpeg';
     } else if (tweet.user === 'mracus') {
       path = 'images/HR-Marcus.jpeg';
-    } else {
+    } else if (tweet.user === 'douglascalhoun') {
       path = 'images/HR-Doug.JPG';
+    } else {
+      path = 'images/wayne.jpg'
     }
     $tweet.find('#picture').attr('src', path);
   }
@@ -49,8 +52,10 @@
       name = 'Anthony Phillips';
     } else if (tweet.user === 'mracus') {
       name = 'Marcus Phillips';
-    } else {
+    } else if (tweet.user === 'douglascalhoun'){
       name = 'Douglas Calhoun';
+    } else if (tweet.user === 'waynewest') {
+      name = 'Wayne West'
     }
     var $name = $('<a href="#" class="name">' + name + '</a></div>');
     $name.prependTo($tweet);
@@ -89,7 +94,7 @@
     $('.tweet-section').html('');
     $('.new-tweets').remove();
     oldIndex = 0;
-    index = array.length - 1;
+    index = array.length;
     generateTweets(oldIndex, index, array);
   }
 
@@ -102,9 +107,9 @@
   var home = function() {
     $('.tweet-section').html('');
     if ($('.new-tweets').length === 0) {
-      $(this).parent().next().before($('<div class="new-tweets"><button>See New Tweets</button></div>'));
+      $(this).parent().next().next().before($('<div class="new-tweets"><button>See New Tweets</button></div>'));
     }
-    index = streams.home.length - 1;
+    index = streams.home.length;
     oldIndex = 0;
     array = streams.home;
     generateTweets(oldIndex, index, array);
@@ -112,18 +117,39 @@
 
   var initializeTweets = function() {
     generateTweets(oldIndex, index, array);
-    oldIndex = streams.home.length - 1;
+    oldIndex = streams.home.length;
   }
   initializeTweets();
 
   var showNewTweets = function() {
     array = streams.home;
-    index = streams.home.length - 1;
+    index = streams.home.length;
     generateTweets(oldIndex, index, array);
-    oldIndex = streams.home.length - 1;
+    oldIndex = streams.home.length;
+  }
+
+  var addWayneToUsers = function() {
+    streams.users.waynewest = [];
+  }
+  addWayneToUsers();
+
+  var addWayneTweet = function (wayneTweet) {
+    streams.users['waynewest'].push(wayneTweet);
+    streams.home.push(wayneTweet);
+    $('#text').val('');
+    showNewTweets();
+  }
+
+  var generateWayneTweet = function() {
+    tweet = {};
+    tweet.user = 'waynewest';
+    tweet.message = $('#text').val();
+    tweet.created_at = new Date();
+    addWayneTweet(tweet);
   }
 
   $body.on('click', '.new-tweets', showNewTweets);
+  $('#tweet').on('click', generateWayneTweet);
   $('.tweet-section').on('click', '#shawndrost', function(array) {
     showUserTweets(streams.users.shawndrost);
   });
@@ -135,6 +161,9 @@
   });
   $('.tweet-section').on('click', '#douglascalhoun', function(array) {
     showUserTweets(streams.users.douglascalhoun);
+  });
+  $('.tweet-section').on('click', '#waynewest', function(array) {
+    showUserTweets(streams.users.waynewest);
   });
   $('#home').on('click', home);
 
