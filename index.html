@@ -23,22 +23,27 @@
 
   <body>
     <header>
-      <img id='home' src="images/home.png">
-      <p>Home</p>
-      <br>
+      <div class='home'>
+        <img id='home' src="images/home.png">
+      </div>
+      <div class='logo'>
+        <img id='logo' src='images/twittler.png'>
+      </div>
+      <form id='search-form'>
+        <input type='text' id='search-text' placeholder="Search Users">
+      </form>
+      <img id='header-user' src="images/wayne.jpg">
     </header>
 
     <div class='status'>
-      <img id='user' src="images/wayne.jpg">
-      <form id='form'>
-        <textarea id='text' placeholder="What's Happening?"></textarea>
+      <img id='status-user' src="images/wayne.jpg">
+      <form id='status-form'>
+        <textarea id='status-text' placeholder="What's Happening?"></textarea>
       </form>
-      <button id='tweet'>Tweet</button>
+      <div id='tweet'>Tweet</div>
     </div>
 
-    <div class='new-tweets'>
-      <button>See New Tweets</button>
-    </div>
+    <div class='new-tweets'>See new Tweets</div>
 
     <!--Get tweets to show below button--> 
     <div class='tweet-section'></div>
