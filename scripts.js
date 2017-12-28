@@ -59,17 +59,17 @@
   }
 
   var createUsernameTags = function($tweet, tweet) {
-    var $username = $('<p id="username">' + '@' + tweet.user + '</p>');
+    var $username = $('<div id="username">' + '@' + tweet.user + ' &middot; ' + '</div>');
     $username.prependTo($tweet);
   }
 
   var createTimeTags = function($tweet, tweet) {
-    var $time = $('<p id="time">' + dateFormat(tweet.created_at, "dddd, mmmm dS, yyyy, h:MM:ss TT") + '</p>');
+    var $time = $('<div id="time">' + dateFormat(tweet.created_at, "dddd, mmmm dS, yyyy, h:MM:ss TT") + '</div>');
     $time.prependTo($tweet);
   }
 
   var createMessageTags = function($tweet, tweet) {
-    var $message = $('<p id="message">' + tweet.message + '</p>');
+    var $message = $('<div id="message">' + tweet.message + '</div>');
     $message.prependTo($tweet);
   }
    
@@ -103,10 +103,10 @@
   var home = function() {
     $('.tweet-section').html('');
     if ($('.new-tweets').length === 0) {
-      $(this).parent().next().next().before($('<div class="new-tweets"><button>See New Tweets</button></div>'));
+      $(this).closest('header').next().after($('<div class="new-tweets">See new Tweets</div>'));
     }
-    index = streams.home.length;
     oldIndex = 0;
+    index = streams.home.length;
     array = streams.home;
     generateTweets(oldIndex, index, array);
   }
@@ -132,16 +132,23 @@
   var addWayneTweet = function (wayneTweet) {
     streams.users['waynewest'].push(wayneTweet);
     streams.home.push(wayneTweet);
-    $('#text').val('');
+    $('#status-text').val('');
     showNewTweets();
   }
 
   var generateWayneTweet = function() {
     tweet = {};
     tweet.user = 'waynewest';
-    tweet.message = $('#text').val();
-    tweet.created_at = new Date();
-    addWayneTweet(tweet);
+    if ($('#status-text').val() !== '') {
+      tweet.message = $('#status-text').val();
+      tweet.created_at = new Date();
+      addWayneTweet(tweet);
+    } 
+  }
+
+  var submitUser = function() {
+    var username = $('input:first').val();
+    showUserTweets(streams.users[username]);
   }
 
   $body.on('click', '.new-tweets', showNewTweets);
@@ -162,5 +169,6 @@
     showUserTweets(streams.users.waynewest);
   });
   $('#home').on('click', home);
+  $('#search-form').submit(submitUser);
 
 });
