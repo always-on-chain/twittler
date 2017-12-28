@@ -1,26 +1,177 @@
-#picture {
-	width: 50px;
-	height: 50px;
-	margin-right: 10px;
-	border-radius: 50%;
+/*
+====================
+ELEMENTS
+====================
+*/
+
+html, body {
+ margin: 0px;
+ padding: 0px;
+ border: 0px;
+ }
+
+body {
+	background-color: #e6ecf0;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-#picture, .name, #username, #time{
+header {
+	margin-bottom: 20px;
+	padding: 10px;
+	background-color: white;
+	border-bottom: 1px solid lightgrey;
+}
+
+/*
+====================
+HEADER
+====================
+*/
+
+.home, .logo, #search-form, #header-user {
 	display: inline;
+}
+
+.logo {
+	margin-left: 45%;
+}
+
+#search-form {
+	margin-left: 30%;
+}
+
+#search-text {
+	padding: 4px;
+	border-radius: 15px;
+	height: 15px;
+	width: 140px;
+	border-color: #e6ecf0;
+	background-color: #e6ecf0
+}
+
+#logo {
+	width: 3%;
+	height: 3%;
 }
 
 #home {
 	width: 3%;
 	height: 3%;
-	float: left;
+	cursor: pointer;
+}
+
+#header-user {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	margin-left: 1%;
+}
+
+/*
+====================
+STATUS
+====================
+*/
+
+.status, .new-tweets, #tweet {
+	margin: auto;
+	text-align: center;
+}
+#status-form, #status-user, #tweet {
 	display: inline;
-	padding-right: 10px;
+}
+
+#status-user {
+	margin-right: 5px;
+}
+
+.status {
+	background-color: #E8F5FD;
+	height: 90px;
+	width: 640px;
+	margin-bottom: 1px;
+}
+
+#status-user {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}
+
+#tweet {
+	background-color: #1da1f2;
+	border-radius: 12px;
+	padding: 8px;
+	top: 50px;
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+	width: 100px;
+}
+
+#status-text {
+	width: 380px;
+	height: 38px;
+	margin-top: 10px;
+	border-color: #A4D9F9;
+	border-radius: 15px;
+	resize: none;
+	outline-width: 0px;
+	padding: 8px;
+}
+
+/*
+====================
+TWEET
+====================
+*/
+
+#time, #username {
+	color: grey;
+	font-size: 14px;
+}
+
+.new-tweets {
+	background-color: #f5f8fa;
+	font-size: 14px;
+	cursor: pointer;
+	padding: 10px;
+	width: 620px;
+	color: #1DA1F2;
+	margin-bottom: 1px;
+}
+
+.tweet-section {
+	width: 640px;
+	margin: auto;
+	margin-top: 1px;
+}
+
+.tweet {
+	margin-bottom: 1px;
+	background-color: white;
+	height: 55px;
+	padding: 10px;
+}
+
+#picture {
+	width: 50px;
+	height: 50px;
+	margin-right: 10px;
+	border-radius: 50%;
+	float: left;
+}
+
+#picture, .name, #username, #time {
+	display: inline;
 }
 
 .name {
-	margin-right: 10px;
+	margin-right: 5px;
 	color: black;
 	text-decoration: none;
+	font-weight: bold; 
+	font-size: 14px;
 }
 
 .name:hover {
@@ -28,26 +179,3 @@
 	text-decoration: underline;
 }
 
-#form, #user {
-	display: inline;
-}
-
-.status {
-	margin-bottom: 30px;
-}
-
-#tweet {
-	/*float: right;*/
-}
-
-#user {
-	width: 30px;
-	height: 30px;
-	border-radius: 50%;
-	display: inline;
-}
-
-#username {
-	margin-right: 20px;
-	color: grey;
-}
