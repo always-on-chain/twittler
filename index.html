@@ -15,7 +15,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Twittler</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="images/twittler.png">
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
     <script src="dateFormat.js"></script>
@@ -23,30 +25,81 @@
 
   <body>
     <header>
-      <div class='home'>
-        <img id='home' src="images/home.png">
-      </div>
-      <div class='logo'>
-        <img id='logo' src='images/twittler.png'>
-      </div>
-      <form id='search-form'>
-        <input type='text' id='search-text' placeholder="Search Users">
+      <img class='home' src="images/home.png">
+      Home
+      <img class='moments' src="images/moments.png">
+      Moments
+      <img class='notifications' src="images/notifications.png">
+      Notifications
+      <img class='messages' src="images/messages.png">
+      Messages
+      <img class='logo' src='images/twittler.png'>
+      <img class='header-user' src="images/wayne.jpg">
+      <form class='search-form'>
+        <input type='text' class='search-text' placeholder="Search Users or Hashtags">
       </form>
-      <img id='header-user' src="images/wayne.jpg">
     </header>
 
-    <div class='status'>
-      <img id='status-user' src="images/wayne.jpg">
-      <form id='status-form'>
-        <textarea id='status-text' placeholder="What's Happening?"></textarea>
-      </form>
-      <div id='tweet'>Tweet</div>
+    <section class='side-profile '>
+      <div class='side-profile-top'>
+        <img class='side-profile-image' src="images/wayne.jpg">
+      </div>
+      <div class='side-profile-bottom'>
+        <div class='profile-name'>Wayne West</div>
+        <div class='profile-username'>@waynewest</div>
+        <div class='profile-tweets'>Tweets</div>
+        <div class='profile-following'>Following</div>
+        <div class='profile-followers'>Followers</div>
+        <div class='profile-tweets-stats'>0</div>
+        <div class='profile-following-stats'>197</div>
+        <div class='profile-followers-stats'>19</div>
+      </div>
+    </section>
+
+    <section class='feed'>
+      <div class='status'>
+        <img class='status-user' src="images/wayne.jpg">
+        <form class='status-form'>
+          <textarea class='status-text' placeholder="What's Happening?"></textarea>
+        </form>
+        <div class='tweet-button'>Tweet</div>
+      </div>
+
+      <div class='new-tweets'>See new Tweets</div>
+
+      <!--Get tweets to show below button--> 
+      <div class='tweet-section'></div>
+    </section>
+
+    <div class='followers'>
+      <div class='followers-header'>
+        <div class='followers-headline'>Who to Follow</div>
+        <div class='followers-refresh'>&middot; Refresh</div>
+        <div class='followers-view'>&middot; View all</div>
+      </div>
+      <div class='followers-user-1'>
+        <img src='images/HR.jpg' class='followers-user-1-image'>
+        <div class='followers-user-1-name'>Hack Reactor</div>
+        <div class='followers-user-1-username'>@hackreactor</div>
+        <div class='followers-button'>Follow</div>
+      </div>
+      <div class='followers-user-2'>
+        <img src='images/CS.png' class='followers-user-1-image'>
+        <div class='followers-user-1-name'>Code School</div>
+        <div class='followers-user-1-username'>@codeschool</div>
+        <div class='followers-button'>Follow</div>
+      </div>
+      <div class='followers-user-3'>
+        <img src='images/codecademy.jpg' class='followers-user-1-image'>
+        <div class='followers-user-1-name'>Codecademy</div>
+        <div class='followers-user-1-username'>@codecademy</div>
+        <div class='followers-button'>Follow</div>
+      </div>
+      <div class='followers-footer'>
+        <img src='images/followers.png' class='followers-icon'>
+        Find people you know
+      </div>
     </div>
-
-    <div class='new-tweets'>See new Tweets</div>
-
-    <!--Get tweets to show below button--> 
-    <div class='tweet-section'></div>
 
     <script src='scripts.js'></script>
   </body>
