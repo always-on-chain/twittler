@@ -9,17 +9,17 @@ html, body {
  padding: 0px;
  border: 0px;
  }
-
 body {
 	background-color: #e6ecf0;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
 header {
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	padding: 10px;
 	background-color: white;
 	border-bottom: 1px solid lightgrey;
+	font-size: 12px;
+	font-weight: bold;
 }
 
 /*
@@ -28,39 +28,37 @@ HEADER
 ====================
 */
 
-.home, .logo, #search-form, #header-user {
-	display: inline;
+.home, .moments, .notifications {
+	width: 20px;
+	height: 20px;
 }
-
+.moments, .notifications, .messages {
+	margin-left: 30px;
+}
+.search-form, .header-user {
+	float: right;
+	margin-top: 14px;
+}
+.home {
+	cursor: pointer;
+}
+.messages {
+	width: 30px;
+	height: 20px;
+}
 .logo {
-	margin-left: 45%;
+	margin-left: 12.5%;
+	width: 40px;
+	height: 40px;
 }
-
-#search-form {
-	margin-left: 30%;
-}
-
-#search-text {
+.search-text {
 	padding: 4px;
 	border-radius: 15px;
 	height: 15px;
 	width: 140px;
-	border-color: #e6ecf0;
 	background-color: #e6ecf0
 }
-
-#logo {
-	width: 3%;
-	height: 3%;
-}
-
-#home {
-	width: 3%;
-	height: 3%;
-	cursor: pointer;
-}
-
-#header-user {
+.header-user {
 	width: 30px;
 	height: 30px;
 	border-radius: 50%;
@@ -73,43 +71,26 @@ STATUS
 ====================
 */
 
-.status, .new-tweets, #tweet {
+.status, .new-tweets {
 	margin: auto;
 	text-align: center;
 }
-#status-form, #status-user, #tweet {
-	display: inline;
+.status-user, .status-form, .tweet-button {
+	float: left;
 }
-
-#status-user {
-	margin-right: 5px;
-}
-
 .status {
 	background-color: #E8F5FD;
 	height: 90px;
 	width: 640px;
 	margin-bottom: 1px;
 }
-
-#status-user {
+.status-user {
+	margin: 24px 8px 0px 80px;
 	width: 30px;
 	height: 30px;
 	border-radius: 50%;
 }
-
-#tweet {
-	background-color: #1da1f2;
-	border-radius: 12px;
-	padding: 8px;
-	top: 50px;
-	color: white;
-	font-weight: bold;
-	cursor: pointer;
-	width: 100px;
-}
-
-#status-text {
+.status-text {
 	width: 380px;
 	height: 38px;
 	margin-top: 10px;
@@ -118,6 +99,17 @@ STATUS
 	resize: none;
 	outline-width: 0px;
 	padding: 8px;
+	font-size: 14px;
+}
+.tweet-button {
+	margin-top: 20px;
+	margin-left: 8px;
+	background-color: #1da1f2;
+	border-radius: 25px;
+	padding: 10px;
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
 }
 
 /*
@@ -125,11 +117,6 @@ STATUS
 TWEET
 ====================
 */
-
-#time, #username {
-	color: grey;
-	font-size: 14px;
-}
 
 .new-tweets {
 	background-color: #f5f8fa;
@@ -140,32 +127,34 @@ TWEET
 	color: #1DA1F2;
 	margin-bottom: 1px;
 }
-
 .tweet-section {
 	width: 640px;
 	margin: auto;
 	margin-top: 1px;
 }
-
 .tweet {
 	margin-bottom: 1px;
 	background-color: white;
 	height: 55px;
 	padding: 10px;
 }
-
-#picture {
+.profile-picture {
 	width: 50px;
 	height: 50px;
 	margin-right: 10px;
 	border-radius: 50%;
 	float: left;
 }
-
-#picture, .name, #username, #time {
+.time, .username {
+	color: grey;
+	font-size: 14px;
+}
+.profile-picture, .name, .username, .time {
 	display: inline;
 }
-
+.message {
+	font-weight: 300;
+}
 .name {
 	margin-right: 5px;
 	color: black;
@@ -173,9 +162,187 @@ TWEET
 	font-weight: bold; 
 	font-size: 14px;
 }
-
 .name:hover {
 	color: blue;
 	text-decoration: underline;
+}
+
+/*
+====================
+SIDE PROFILE
+====================
+*/
+
+.side-profile, 
+.side-profile-top, 
+.side-profile-bottom,
+.feed,
+.followers {
+	float: left;
+}
+.side-profile, 
+.side-profile-top, 
+.side-profile-bottom {
+	width: 250px;
+}
+.side-profile {
+	margin-right: 10px;
+	margin-left: 30px;
+}
+.side-profile-top {
+	height: 100px;
+	background-color: #1DA1F2;
+}
+.side-profile-bottom {
+	height: 110px;
+	background-color: white;
+}
+.side-profile-image {
+	width: 65px;
+	height: 65px;
+	border-radius: 50%;
+	margin-left: 10px;
+	margin-top: 65px;
+	border: 3px solid white;
+	position: relative;
+}
+.profile-name, .profile-username {
+	margin-left: 90px;
+}
+.profile-name {
+	margin-top: 8px;
+	font-weight: bold;
+	font-size: 18px;
+}
+.profile-username {
+	margin-top: 2px;
+	color: grey;
+	font-size: 15px;
+}
+.profile-tweets,
+.profile-following,
+.profile-followers {
+	margin-top: 15px;
+	font-size: 12px;
+	font-weight: bold;
+	color: grey;
+	float: left;
+}
+.profile-tweets {
+	margin-left: 20px;
+}
+.profile-following, .profile-followers {
+	margin-left: 30px;
+}
+.profile-tweets-stats,
+.profile-following-stats,
+.profile-followers-stats {
+	float: left;
+	margin-top: 2px;
+	color: #1DA1F2;
+	font-weight: bold;
+}
+.profile-tweets-stats {
+	margin-left: 20px;
+}
+.profile-following-stats, .profile-followers-stats {
+	margin-left: 60px;
+}
+
+/*
+====================
+FOLLOWERS
+====================
+*/
+
+.followers {
+	height: 300px;
+	background-color: white;
+	margin-left: 10px;
+	padding: 10px;
+	width: 265px;
+}
+.followers-header {
+	float: left;
+	margin-bottom: 10px;
+}
+.followers-headline, 
+.followers-refresh,
+.followers-view {
+	float: left;
+	margin-top: 5px;
+	margin-right: 3px;
+}
+.followers-headline {
+	font-weight: bold;
+	font-size: 18px;
+}
+.followers-refresh,
+.followers-view {
+	font-size: 12px;
+	color: #1DA1F2;
+	margin-top: 12px;
+}
+.followers-user-1,
+.followers-user-2,
+.followers-user-3 {
+	float: left;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid lightgrey;
+}
+.followers-user-1-image,
+.followers-user-2-image,
+.followers-user-3-image {
+	width: 50px;
+	height: 50px;
+	margin-right: 10px;
+	border-radius: 50%;
+	float: left;
+}
+.followers-user-1-name,
+.followers-user-1-username {
+	float: left;
+}
+.followers-user-1-name,
+.followers-user-2-name,
+.followers-user-3-name {
+	margin-right: 5px;
+	color: black;
+	text-decoration: none;
+	font-weight: bold; 
+	font-size: 14px;
+}
+.followers-user-1-username,
+.followers-user-2-username,
+.followers-user-3-username {
+	color: grey;
+	font-size: 14px;
+}
+.followers-button {
+	border: 1px solid #1DA1F2;
+	float: left;
+	width: 80px;
+	height: 20px;
+	border-radius: 18px;
+	padding: 4px;
+	text-align: center;
+	margin-right: 30px;
+	margin-top: 10px;
+	font-weight: bold;
+	font-size: 13px;
+	color: #1DA1F2;
+}
+.followers-footer {
+	color: #1DA1F2;
+	font-size: 12px;
+	margin-top: 10px;
+	float: left;
+}
+.followers-icon {
+	width: 15px;
+	height: 15px;
+	float: left;
+	margin-right: 5px;
 }
 
