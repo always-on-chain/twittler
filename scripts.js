@@ -21,77 +21,54 @@
   var array = streams.home
   var index = streams.home.length;
   var oldIndex = 0;
+  var visitor = 'waynewest';
 
-  var createProfilePicTags = function($tweet, tweet) {
-    var $profilePic = $('<img class="profile-picture">');
-    var path;
-    $profilePic.prependTo($tweet);
+   var createProfilePics = function(tweet) {
     if (tweet.user === 'shawndrost') {
-      path = 'images/HR-Shawn.jpg';
+      return 'images/HR-Shawn.jpg';
     } else if (tweet.user === 'sharksforcheap') {
-      path = 'images/HR-Sharks.jpeg';
+      return 'images/HR-Sharks.jpeg';
     } else if (tweet.user === 'mracus') {
-      path = 'images/HR-Marcus.jpeg';
+      return 'images/HR-Marcus.jpeg';
     } else if (tweet.user === 'douglascalhoun') {
-      path = 'images/HR-Doug.JPG';
+      return 'images/HR-Doug.JPG';
     } else {
-      path = 'images/wayne.jpg'
+      return 'images/wayne.jpg'
     }
-    $tweet.find('.profile-picture').attr('src', path);
   }
 
-  var createNameTags = function($tweet, tweet) {
-    var name;
-    if (tweet.user === 'shawndrost') {
-      name = 'shawndrost';
+  var createNames = function(tweet) {
+     if (tweet.user === 'shawndrost') {
+      return 'shawndrost';
     } else if (tweet.user === 'sharksforcheap') {
-      name = 'Anthony Phillips';
+      return 'Anthony Phillips';
     } else if (tweet.user === 'mracus') {
-      name = 'Marcus Phillips';
+      return 'Marcus Phillips';
     } else if (tweet.user === 'douglascalhoun'){
-      name = 'Douglas Calhoun';
+      return 'Douglas Calhoun';
     } else if (tweet.user === 'waynewest') {
-      name = 'Wayne West'
+      return 'Wayne West'
     }
-    var $name = $('<a href="#" class="name">' + name + '</a></div>');
-    $name.prependTo($tweet);
-    $tweet.find('.name').attr('id', tweet.user);
   }
 
-  var createUsernameTags = function($tweet, tweet) {
-    var $username = $('<div class="username">' + '@' + tweet.user + ' &middot; ' + '</div>');
-    $username.prependTo($tweet);
-  }
-
-  var createTimeTags = function($tweet, tweet) {
-    var $time = $('<div class="time">' + dateFormat(tweet.created_at, "dddd, mmmm dS, yyyy, h:MM:ss TT") + '</div>');
-    $time.prependTo($tweet);
-  }
-
-  var createMessageTags = function($tweet, tweet) {
-    var $message = $('<div class="message">' + tweet.message + '</div>');
-    $message.prependTo($tweet);
-  }
-   
   var showTweets = function(index, array) {
     var tweet = array[index];
     var $tweet = $('<div class="tweet"></div>');
+    var $name = $('<a href="#" class="name">' + createNames(tweet) + '</a></div>');
+    var $username = $('<div class="username">' + '@' + tweet.user + ' &middot; ' + '</div>');
+    var $time = $('<div class="time">' + dateFormat(tweet.created_at, "dddd, mmmm dS, yyyy, h:MM:ss TT") + '</div>');
+    var $message = $('<div class="message">' + tweet.message + '</div>');
+    var $profilePic = $('<img class="profile-picture">');
 
-    createMessageTags($tweet, tweet);
-    createTimeTags($tweet, tweet);
-    createUsernameTags($tweet, tweet);
-    createNameTags($tweet, tweet);
-    createProfilePicTags($tweet, tweet);
-    
+    $message.prependTo($tweet);
+    $time.prependTo($tweet);
+    $username.prependTo($tweet);
+    $name.prependTo($tweet);
     $tweet.prependTo($('.tweet-section'));
-  }
+    $profilePic.prependTo($tweet);
 
-   var showUserTweets = function(array) {
-    $('.tweet-section').html('');
-    $('.new-tweets').remove();
-    oldIndex = 0;
-    index = array.length;
-    generateTweets(oldIndex, index, array);
+    $tweet.find('.profile-picture').attr('src', createProfilePics(tweet));
+    $tweet.find('.name').attr('id', tweet.user);
   }
 
   var generateTweets = function(oldIndex, index, array) {
@@ -100,22 +77,24 @@
     }
   }
 
-  var home = function() {
-    $('.tweet-section').html('');
-    if ($('.new-tweets').length === 0) {
-      $(this).closest('header').next().next().find('.status').after($('<div class="new-tweets">See new Tweets</div>'));
-    }
-    oldIndex = 0;
-    index = streams.home.length;
-    array = streams.home;
-    generateTweets(oldIndex, index, array);
-  }
-
   var initializeTweets = function() {
     generateTweets(oldIndex, index, array);
     oldIndex = streams.home.length;
   }
   initializeTweets();
+
+  var showTweetsAfterPageClears = function(array) {
+    //After click on a user name or Home button
+    if ($('.name').data('clicked')) {
+      $('.new-tweets').hide();
+    } else if ($('.home').data('clicked')) {
+      $('.new-tweets').show();
+    }
+    $('.tweet-section').html('');
+    oldIndex = 0;
+    index = array.length;
+    generateTweets(oldIndex, index, array);
+  }
 
   var showNewTweets = function() {
     array = streams.home;
@@ -124,32 +103,23 @@
     oldIndex = streams.home.length;
   }
 
-  var addWayneToUsers = function() {
-    streams.users.waynewest = [];
+  var addNewUser = function(username) {
+    streams.users[username] = [];
   }
-  addWayneToUsers();
+  addNewUser(visitor);
 
-  var addWayneTweet = function (wayneTweet) {
-    streams.users['waynewest'].push(wayneTweet);
-    streams.home.push(wayneTweet);
-    $('.status-text').val('');
-    $('.profile-tweets-stats').text(streams.users['waynewest'].length);
-    showNewTweets();
-  }
-
-  var generateWayneTweet = function() {
-    tweet = {};
-    tweet.user = 'waynewest';
+  var generateNewUserTweet = function(visitor) {
     if ($('.status-text').val() !== '') {
-      tweet.message = $('.status-text').val();
-      tweet.created_at = new Date();
-      addWayneTweet(tweet);
+      writeTweet($('.status-text').val());
+      $('.status-text').val('');
+      $('.profile-tweets-stats').text(streams.users[visitor].length);
+      showNewTweets();
     } 
   }
 
-   var showSameHashtags = function(content) {
+  var showSameHashtags = function(content) {
     $('.tweet-section').html('');
-    $('.new-tweets').remove();
+    $('.new-tweets').hide();
     streams.home.forEach(function(obj, index) {
       if (obj.message.includes(content)) {
         showTweets(index, streams.home);
@@ -162,28 +132,31 @@
     if (content.slice(0, 1) === '#') {
       showSameHashtags(content);
     } else {
-      showUserTweets(streams.users[content]);
+      showTweetsAfterPageClears(streams.users[content]);
     }
+    $('.search-text').val('');
+  }
+
+  var clickOnName = function(location, array) {
+    $('.tweet-section').on('click', location, function() {
+      $('.name').data('clicked', true);
+      showTweetsAfterPageClears(array);
+    });
   }
   
   $body.on('click', '.new-tweets', showNewTweets);
-  $('.tweet-button').on('click', generateWayneTweet);
-  $('.tweet-section').on('click', '#shawndrost', function(array) {
-    showUserTweets(streams.users.shawndrost);
+  $('.tweet-button').on('click', function() {
+    generateNewUserTweet(visitor);
   });
-  $('.tweet-section').on('click', '#sharksforcheap', function(array) {
-    showUserTweets(streams.users.sharksforcheap);
-  });
-  $('.tweet-section').on('click', '#mracus', function(array) {
-    showUserTweets(streams.users.mracus);
-  });
-  $('.tweet-section').on('click', '#douglascalhoun', function(array) {
-    showUserTweets(streams.users.douglascalhoun);
-  });
-  $('.tweet-section').on('click', '#waynewest', function(array) {
-    showUserTweets(streams.users.waynewest);
-  });
-  $('.home').on('click', home);
   $('.search-form').submit(searchContent);
+  $('.home').on('click', function() {
+    $(this).data('clicked', true);
+    showTweetsAfterPageClears(streams.home)
+  });
+  clickOnName('#shawndrost', streams.users.shawndrost);
+  clickOnName('#sharksforcheap', streams.users.sharksforcheap);
+  clickOnName('#mracus', streams.users.mracus);
+  clickOnName('#douglascalhoun', streams.users.douglascalhoun);
+  clickOnName('#waynewest', streams.users.waynewest);
 
 });
